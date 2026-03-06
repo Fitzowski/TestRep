@@ -37,14 +37,6 @@ app.use(session({
 // ========== API РОУТЫ (до static файлов!) ==========
 app.use('/api/auth', authRoutes);
 
-import catalogRoutes from './routes/route_catalog';
-import cartRoutes from './routes/route_cart';
-import deliveryRoutes from './routes/route_delivery';
-
-app.use('/api/catalog', catalogRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/api/delivery', deliveryRoutes);
-
 // Статические файлы
 app.use(express.static(path.join(__dirname, '../public')));
 

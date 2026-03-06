@@ -1,60 +1,55 @@
 import { api } from '../services/api.js';
+// import { apiCart } from '../services/api_cart.js';
 import { router } from '../main.js';
-import { AuthResponse } from '../types/index.js';
-
 export async function renderMainPage() {
-  const app = document.getElementById('app');
-  if (!app) return;
-
-  try {
-    const response: AuthResponse = await api.getMe();
-    const user = response.user;
-    
-    // Топ продаж с реальными ID из базы
-    const topSellingTanks = [
-      { 
-        id: 1,
-        name: 'Объект 140', 
-        nation: 'СССР', 
-        tier: 10, 
-        price: 6200,
-        image: '/images/tanks/object-140.png',
-        advantage: 'Лучший СТ для рандома'
-      },
-      { 
-        id: 9,
-        name: 'ИС-7', 
-        nation: 'СССР', 
-        tier: 10, 
-        price: 5900,
-        image: '/images/tanks/is-7.png',
-        advantage: 'Легендарный тяж'
-      },
-      { 
-        id: 2,
-        name: 'E 100', 
-        nation: 'Германия', 
-        tier: 10, 
-        price: 6100,
-        image: '/images/tanks/e-100.png',
-        advantage: 'Непробиваемая броня'
-      }
-    ];
-
-    const advantages = [
-      { icon: 'fa-bolt', title: 'Мгновенная доставка', desc: 'Танк в ангаре через 5 минут' },
-      { icon: 'fa-shield-alt', title: 'Гарантия качества', desc: 'Все танки с полным обслуживанием' },
-      { icon: 'fa-tag', title: 'Лучшие цены', desc: 'На 20% дешевле чем в премиум магазине' },
-      { icon: 'fa-gift', title: 'Бонусы за покупку', desc: 'Кэшбек до 10% золотом' }
-    ];
-
-    const newsItems = [
-      { title: 'Скидка на советские танки', date: '27.02.2026', desc: '-15% на всю технику СССР' },
-      { title: 'Новогодний ивент', date: '25.02.2026', desc: 'Специальные предложения' },
-      { title: 'Пополнение в магазине', date: '20.02.2026', desc: 'Новые премиум танки' }
-    ];
-    
-    app.innerHTML = `
+    const app = document.getElementById('app');
+    if (!app)
+        return;
+    try {
+        const response = await api.getMe();
+        const user = response.user;
+        // Топ продаж с реальными ID из базы
+        const topSellingTanks = [
+            {
+                id: 1,
+                name: 'Объект 140',
+                nation: 'СССР',
+                tier: 10,
+                price: 6200,
+                image: '/images/tanks/object-140.png',
+                advantage: 'Лучший СТ для рандома'
+            },
+            {
+                id: 9,
+                name: 'ИС-7',
+                nation: 'СССР',
+                tier: 10,
+                price: 5900,
+                image: '/images/tanks/is-7.png',
+                advantage: 'Легендарный тяж'
+            },
+            {
+                id: 2,
+                name: 'E 100',
+                nation: 'Германия',
+                tier: 10,
+                price: 6100,
+                image: '/images/tanks/e-100.png',
+                advantage: 'Непробиваемая броня'
+            }
+        ];
+        const advantages = [
+            { icon: 'fa-bolt', title: 'Мгновенная доставка', desc: 'Танк в ангаре через 5 минут' },
+            { icon: 'fa-shield-alt', title: 'Гарантия качества', desc: 'Все танки с полным обслуживанием' },
+            { icon: 'fa-tag', title: 'Лучшие цены', desc: 'На 20% дешевле чем в премиум магазине' },
+            { icon: 'fa-gift', title: 'Бонусы за покупку', desc: 'Кэшбек до 10% золотом' }
+        ];
+        const newsItems = [
+            { title: 'Скидка на советские танки', date: '27.02.2026', desc: '-15% на всю технику СССР' },
+            { title: 'Новогодний ивент', date: '25.02.2026', desc: 'Специальные предложения' },
+            { title: 'Пополнение в магазине', date: '20.02.2026', desc: 'Новые премиум танки' }
+        ];
+        app.innerHTML = `
       <div class="wot-container">
         <!-- Шапка с приветствием и навигацией -->
         <div class="shop-header">
@@ -256,116 +251,97 @@ export async function renderMainPage() {
         </div>
       </div>
     `;
-
-    setupEventListeners();
-
-  } catch {
-    router.navigateTo('/');
-  }
-}
-
-function setupEventListeners() {
-  // Навигация
-  document.getElementById('catalog-btn')?.addEventListener('click', () => {
-    router.navigateTo('/catalog');
-  });
-
-  document.getElementById('cart-btn')?.addEventListener('click', () => {
-    router.navigateTo('/cart');
-  });
-
-  document.getElementById('logout-btn')?.addEventListener('click', async () => {
-    await api.logout();
-    router.navigateTo('/');
-  });
-
-  document.getElementById('view-all-tanks')?.addEventListener('click', () => {
-    router.navigateTo('/catalog');
-  });
-
-  document.getElementById('profile-btn')?.addEventListener('click', () => {
-    router.navigateTo('/profile');
-  });
-
-  document.getElementById('promo-simple-btn')?.addEventListener('click', () => {
-    router.navigateTo('/catalog');
-  });
-
-  // Кнопки покупки
-  document.querySelectorAll('.tank-buy-btn').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-      const target = e.currentTarget as HTMLElement;
-      const tankId = parseInt(target.getAttribute('data-tank-id') || '0');
-      const tankName = target.getAttribute('data-tank-name') || 'Танк';
-      
-      // Визуальная индикация загрузки
-      target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Добавление...';
-      (target as HTMLButtonElement).disabled = true;
-      
-      try {
-        // Успех
-        target.innerHTML = '<i class="fas fa-check"></i> Добавлено!';
-        target.classList.add('success');
-        
-        // Показываем уведомление
-        showNotification(`${tankName} добавлен в корзину!`);
-        
-        // Восстанавливаем кнопку через 2 секунды
-        setTimeout(() => {
-          target.innerHTML = '<i class="fas fa-shopping-cart" style="margin-right: 5px;"></i> Купить';
-          target.classList.remove('success');
-          (target as HTMLButtonElement).disabled = false;
-        }, 2000);
-        
-      } catch (err) {
-        console.error(err);
-        target.innerHTML = '<i class="fas fa-shopping-cart" style="margin-right: 5px;"></i> Купить';
-        (target as HTMLButtonElement).disabled = false;
-        alert('Ошибка при добавлении в корзину. Попробуйте ещё раз.');
-      }
-    });
-  });
-
-  // Запуск таймера
-  startSimpleTimer();
-}
-
-function showNotification(message: string) {
-  const notification = document.createElement('div');
-  notification.className = 'notification';
-  notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
-  document.body.appendChild(notification);
-  
-  setTimeout(() => notification.classList.add('show'), 10);
-  
-  setTimeout(() => {
-    notification.classList.remove('show');
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-}
-
-function startSimpleTimer(): void {
-  const now = new Date();
-  const end = new Date(now);
-  end.setHours(23, 59, 59, 999);
-  
-  function update(): void {
-    const diff = end.getTime() - Date.now();
-    if (diff <= 0) {
-      document.getElementById('simple-hours')!.textContent = '00';
-      document.getElementById('simple-minutes')!.textContent = '00';
-      document.getElementById('simple-seconds')!.textContent = '00';
-      return;
+        setupEventListeners();
     }
-    const hours = Math.floor(diff / 3600000);
-    const minutes = Math.floor((diff % 3600000) / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
-    
-    document.getElementById('simple-hours')!.textContent = hours.toString().padStart(2, '0');
-    document.getElementById('simple-minutes')!.textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('simple-seconds')!.textContent = seconds.toString().padStart(2, '0');
-  }
-  
-  update();
-  setInterval(update, 1000);
+    catch {
+        router.navigateTo('/');
+    }
+}
+function setupEventListeners() {
+    // Навигация
+    document.getElementById('catalog-btn')?.addEventListener('click', () => {
+        router.navigateTo('/catalog');
+    });
+    document.getElementById('cart-btn')?.addEventListener('click', () => {
+        router.navigateTo('/cart');
+    });
+    document.getElementById('logout-btn')?.addEventListener('click', async () => {
+        await api.logout();
+        router.navigateTo('/');
+    });
+    document.getElementById('view-all-tanks')?.addEventListener('click', () => {
+        router.navigateTo('/catalog');
+    });
+    document.getElementById('profile-btn')?.addEventListener('click', () => {
+        router.navigateTo('/profile');
+    });
+    document.getElementById('promo-simple-btn')?.addEventListener('click', () => {
+        router.navigateTo('/catalog');
+    });
+    // Кнопки покупки
+    document.querySelectorAll('.tank-buy-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const target = e.currentTarget;
+            const tankId = parseInt(target.getAttribute('data-tank-id') || '0');
+            const tankName = target.getAttribute('data-tank-name') || 'Танк';
+            // Визуальная индикация загрузки
+            target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Добавление...';
+            target.disabled = true;
+            try {
+                // await apiCart.addToCart(tankId, 1);
+                // Успех
+                target.innerHTML = '<i class="fas fa-check"></i> Добавлено!';
+                target.classList.add('success');
+                // Показываем уведомление
+                showNotification(`${tankName} добавлен в корзину!`);
+                // Восстанавливаем кнопку через 2 секунды
+                setTimeout(() => {
+                    target.innerHTML = '<i class="fas fa-shopping-cart" style="margin-right: 5px;"></i> Купить';
+                    target.classList.remove('success');
+                    target.disabled = false;
+                }, 2000);
+            }
+            catch (err) {
+                console.error(err);
+                target.innerHTML = '<i class="fas fa-shopping-cart" style="margin-right: 5px;"></i> Купить';
+                target.disabled = false;
+                alert('Ошибка при добавлении в корзину. Попробуйте ещё раз.');
+            }
+        });
+    });
+    // Запуск таймера
+    startSimpleTimer();
+}
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.classList.add('show'), 10);
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+function startSimpleTimer() {
+    const now = new Date();
+    const end = new Date(now);
+    end.setHours(23, 59, 59, 999);
+    function update() {
+        const diff = end.getTime() - Date.now();
+        if (diff <= 0) {
+            document.getElementById('simple-hours').textContent = '00';
+            document.getElementById('simple-minutes').textContent = '00';
+            document.getElementById('simple-seconds').textContent = '00';
+            return;
+        }
+        const hours = Math.floor(diff / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+        document.getElementById('simple-hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('simple-minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('simple-seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+    update();
+    setInterval(update, 1000);
 }

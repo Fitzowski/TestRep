@@ -32,6 +32,21 @@ export class Router {
 export const router = new Router();
 
 // ========================================================
+// Auth-маршруты
+import { renderHomePage } from './pages/HomePage.js';
+import { renderLoginPage } from './pages/LoginPage.js';
+import { renderRegisterPage } from './pages/RegisterPage.js';
+import { renderMainPage } from './pages/MainPage.js';
+// маршрут профиля
+import { renderProfilePage } from './pages/ProfilePage.js';
+
+router.addRoute('/', renderHomePage);
+router.addRoute('/login', renderLoginPage);
+router.addRoute('/register', renderRegisterPage);
+router.addRoute('/main', renderMainPage);
+// маршрут профиля
+router.addRoute('/profile', renderProfilePage);
+
 // Маршруты каталога
 import { renderCatalogPage } from './pages/CatalogPage_catalog.js';
 

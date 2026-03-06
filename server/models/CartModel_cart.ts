@@ -1,13 +1,30 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { Product, getProductById } from './ProductModel_catalog';
 
 const CARTS_FILE = path.join(__dirname, '../../carts.json');
+
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image?: string;
+}
 
 export interface CartItem {
   productId: number;
   quantity: number;
   product: Product;
+}
+
+// Временные товары для тестирования
+const TEMP_PRODUCTS: Product[] = [
+  { id: 1, name: 'Танк Т-34', price: 1000, image: '/images/tanks/t34.jpg' },
+  { id: 2, name: 'Танк Т-44', price: 1500, image: '/images/tanks/t44.jpg' },
+  { id: 3, name: 'Танк ИС-3', price: 2000, image: '/images/tanks/is3.jpg' },
+];
+
+async function getProductById(id: number): Promise<Product | undefined> {
+  return TEMP_PRODUCTS.find(p => p.id === id);
 }
 
 export interface Cart {

@@ -7,26 +7,25 @@ import {
   clearUserCart,
   getCartItemCount 
 } from '../controllers/controller_cart';
-import { requireAuth } from '../middleware/authMiddleware';
 
 const router = Router();
 
-// Получить корзину (только для авторизованных)
-router.get('/', requireAuth, getCart);
+// Получить корзину
+router.get('/', getCart);
 
 // Получить количество товаров в корзине
 router.get('/count', getCartItemCount);
 
-// Добавить товар в корзину (только для авторизованных)
-router.post('/', requireAuth, addItemToCart);
+// Добавить товар в корзину
+router.post('/', addItemToCart);
 
-// Изменить количество товара (только для авторизованных)
-router.put('/', requireAuth, updateItemQuantity);
+// Изменить количество товара
+router.put('/', updateItemQuantity);
 
-// Удалить товар из корзины (только для авторизованных)
-router.delete('/:productId', requireAuth, removeItemFromCart);
+// Удалить товар из корзины
+router.delete('/:productId', removeItemFromCart);
 
-// Очистить корзину (только для авторизованных)
-router.delete('/', requireAuth, clearUserCart);
+// Очистить корзину
+router.delete('/', clearUserCart);
 
 export default router;

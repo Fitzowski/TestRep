@@ -7,16 +7,14 @@ import {
   clearCart,
   getCartTotal 
 } from '../models/CartModel_cart';
-import { getUserId } from '../middleware/authMiddleware';
+
+// Временный ID пользователя для тестирования
+const TEMP_USER_ID = 'temp-user-123';
 
 // Получить корзину пользователя
 export async function getCart(req: Request, res: Response) {
   try {
-    const userId = getUserId(req);
-    
-    if (!userId) {
-      return res.status(401).json({ message: 'Не авторизован' });
-    }
+    const userId = TEMP_USER_ID;
 
     const cart = await getCartByUserId(userId);
     const total = await getCartTotal(userId);
@@ -34,11 +32,7 @@ export async function getCart(req: Request, res: Response) {
 // Добавить товар в корзину
 export async function addItemToCart(req: Request, res: Response) {
   try {
-    const userId = getUserId(req);
-    
-    if (!userId) {
-      return res.status(401).json({ message: 'Не авторизован' });
-    }
+    const userId = TEMP_USER_ID;
 
     const { productId, quantity } = req.body;
 
@@ -65,11 +59,7 @@ export async function addItemToCart(req: Request, res: Response) {
 // Изменить количество товара
 export async function updateItemQuantity(req: Request, res: Response) {
   try {
-    const userId = getUserId(req);
-    
-    if (!userId) {
-      return res.status(401).json({ message: 'Не авторизован' });
-    }
+    const userId = TEMP_USER_ID;
 
     const { productId, quantity } = req.body;
 
@@ -96,11 +86,7 @@ export async function updateItemQuantity(req: Request, res: Response) {
 // Удалить товар из корзины
 export async function removeItemFromCart(req: Request, res: Response) {
   try {
-    const userId = getUserId(req);
-    
-    if (!userId) {
-      return res.status(401).json({ message: 'Не авторизован' });
-    }
+    const userId = TEMP_USER_ID;
 
     const productId = parseInt(String(req.params.productId));
 
@@ -126,11 +112,7 @@ export async function removeItemFromCart(req: Request, res: Response) {
 // Очистить корзину
 export async function clearUserCart(req: Request, res: Response) {
   try {
-    const userId = getUserId(req);
-    
-    if (!userId) {
-      return res.status(401).json({ message: 'Не авторизован' });
-    }
+    const userId = TEMP_USER_ID;
 
     await clearCart(userId);
 
@@ -144,11 +126,7 @@ export async function clearUserCart(req: Request, res: Response) {
 // Получить количество товаров в корзине
 export async function getCartItemCount(req: Request, res: Response) {
   try {
-    const userId = getUserId(req);
-    
-    if (!userId) {
-      return res.json({ count: 0 });
-    }
+    const userId = TEMP_USER_ID;
 
     const cart = await getCartByUserId(userId);
     const count = cart ? cart.items.reduce((sum, item) => sum + item.quantity, 0) : 0;

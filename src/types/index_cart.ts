@@ -1,6 +1,15 @@
 // Типы для корзины
 
-import { Product } from './index_catalog';
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  img?: string;
+  image?: string;
+  level?: number;
+  type?: string;
+  nation?: string;
+}
 
 export interface CartItem {
   productId: number;

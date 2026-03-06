@@ -5,20 +5,19 @@ import {
   createNewDelivery, 
   cancelDeliveryById 
 } from '../controllers/controller_delivery';
-import { requireAuth } from '../middleware/authMiddleware';
 
 const router = Router();
 
-// Получить все доставки пользователя (только для авторизованных)
-router.get('/', requireAuth, getDeliveries);
+// Получить все доставки пользователя
+router.get('/', getDeliveries);
 
-// Создать доставку (только для авторизованных)
-router.post('/', requireAuth, createNewDelivery);
+// Создать доставку
+router.post('/', createNewDelivery);
 
-// Получить доставку по ID (только для авторизованных)
-router.get('/:id', requireAuth, getDelivery);
+// Получить доставку по ID
+router.get('/:id', getDelivery);
 
-// Отменить доставку (только для авторизованных)
-router.delete('/:id', requireAuth, cancelDeliveryById);
+// Отменить доставку
+router.delete('/:id', cancelDeliveryById);
 
 export default router;

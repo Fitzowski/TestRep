@@ -44,4 +44,8 @@ router.addRoute('/profile', renderProfilePage);
 // router.addRoute('/catalog', renderCatalogPage);
 // router.addRoute('/cart', renderCartPage);
 // router.addRoute('/delivery', renderDeliveryPage);
+// Маршруты каталога
+import { renderCatalogPage } from './pages/CatalogPage_catalog.js';
+router.addRoute('/', renderCatalogPage);
+router.addRoute('/catalog', renderCatalogPage);
 // ========================================================

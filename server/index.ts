@@ -8,6 +8,7 @@ declare module 'express-session' {
     userId: string;
   }
 }
+import path from 'path';
 
 const app = express();
 const PORT = 3000;
@@ -36,6 +37,10 @@ app.use(session({
 
 // ========== API РОУТЫ (до static файлов!) ==========
 app.use('/api/auth', authRoutes);
+// ========== API РОУТЫ (до static файлов!) ==========
+import catalogRoutes from './routes/route_catalog';
+
+app.use('/api/catalog', catalogRoutes);
 
 // Статические файлы
 app.use(express.static(path.join(__dirname, '../public')));

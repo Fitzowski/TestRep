@@ -47,3 +47,9 @@ router.addRoute('/main', renderMainPage);
 // маршрут профиля
 router.addRoute('/profile', renderProfilePage);
 
+// Маршруты каталога
+import { renderCatalogPage } from './pages/CatalogPage_catalog.js';
+
+router.addRoute('/', renderCatalogPage);
+router.addRoute('/catalog', renderCatalogPage);
+// ========================================================

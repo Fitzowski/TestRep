@@ -1,4 +1,13 @@
 import express from 'express';
+import session from 'express-session';
+import path from 'path';
+import authRoutes from './routes/auth';
+
+declare module 'express-session' {
+  interface SessionData {
+    userId: string;
+  }
+}
 import path from 'path';
 
 const app = express();
@@ -17,6 +26,28 @@ app.use(express.urlencoded({ extended: true }));
 import deliveryRoutes from './routes/route_delivery';
 
 app.use('/api/delivery', deliveryRoutes);
+import cartRoutes from './routes/route_cart';
+
+app.use('/api/cart', cartRoutes);
+// Настройка сессии с правильными параметрами
+app.use(session({
+  secret: 'your-secret-key-wot-shop-2026',
+  resave: true, // Изменено на true
+  saveUninitialized: true, // Изменено на true
+  cookie: { 
+    secure: false, 
+    maxAge: 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    sameSite: 'lax'
+  }
+}));
+
+// ========== API РОУТЫ (до static файлов!) ==========
+app.use('/api/auth', authRoutes);
+// ========== API РОУТЫ (до static файлов!) ==========
+import catalogRoutes from './routes/route_catalog';
+
+app.use('/api/catalog', catalogRoutes);
 
 // Статические файлы
 app.use(express.static(path.join(__dirname, '../public')));

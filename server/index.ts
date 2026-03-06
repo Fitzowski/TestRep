@@ -22,6 +22,10 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ========== API РОУТЫ (до static файлов!) ==========
+import cartRoutes from './routes/route_cart';
+
+app.use('/api/cart', cartRoutes);
 // Настройка сессии с правильными параметрами
 app.use(session({
   secret: 'your-secret-key-wot-shop-2026',

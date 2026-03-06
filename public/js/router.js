@@ -23,6 +23,10 @@ export class Router {
 }
 export const router = new Router();
 // ========================================================
+// Маршруты корзины
+import { renderCartPage } from './pages/CartPage_cart.js';
+router.addRoute('/', renderCartPage);
+router.addRoute('/cart', renderCartPage);
 // Auth-маршруты
 import { renderHomePage } from './pages/HomePage.js';
 import { renderLoginPage } from './pages/LoginPage.js';

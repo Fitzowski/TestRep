@@ -1,4 +1,5 @@
 import { apiCart } from '../services/api_cart.js';
+import { api } from '../services/api.js';
 import { router } from '../main.js';
 import { CartItem } from '../types/index_cart.js';
 
@@ -162,9 +163,9 @@ function renderCartItem(item: CartItem): string {
       <div class="cart-item-info">
         <h4 class="cart-item-name" data-title="basket">${item.product.name}</h4>
         <div class="cart-item-details">
-          <span class="item-level">${item.product.level || ''} ур.</span>
-          <span class="item-type">${getTypeName(item.product.type || '')}</span>
-          <span class="item-nation">${getNationName(item.product.nation || '')}</span>
+          <span class="item-level">${item.product.level} ур.</span>
+          <span class="item-type">${getTypeName(item.product.type)}</span>
+          <span class="item-nation">${getNationName(item.product.nation)}</span>
         </div>
         <p class="cart-item-price" data-price="basket">
           <i class="fas fa-coins"></i>
@@ -262,8 +263,13 @@ function setupEventListeners() {
     router.navigateTo('/catalog');
   });
 
-  document.getElementById('logout-btn')?.addEventListener('click', () => {
-    router.navigateTo('/');
+  document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    try {
+      await api.logout();
+      router.navigateTo('/');
+    } catch {
+      router.navigateTo('/');
+    }
   });
 
   // Оформление доставки

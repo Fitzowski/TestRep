@@ -1,414 +1,345 @@
 /* =========================================
-   Доп стили страницы ProfilePage
+   Основные стили сайта IYHANSHOP
    ========================================= */
 
-/* Анимки */
-.profile-page {
-  animation: fadeIn 0.3s ease-in-out;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --wot-bg-dark: #0d0e10;
+  --wot-bg-panel: #1a1c20;
+  --wot-bg-input: #0f1012;
+  
+  --wot-primary: #ff7800;
+  --wot-primary-hover: #ffa03d;
+  --wot-secondary: #9e9e9e;
+  --wot-gold: #c9a052;
+  
+  --wot-text-main: #e2e2e2;
+  --wot-text-dim: #8f8f8f;
+  
+  --wot-border: #3a3a3a;
+  --wot-shadow: rgba(0, 0, 0, 0.6);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Заголовок и навигация */
-.profile-page .profile-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(255, 120, 0, 0.3);
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.profile-page .profile-title {
-  color: var(--wot-primary);
-  font-size: 2rem;
-  font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  position: relative;
-  display: inline-block;
-}
-
-.profile-page .profile-title::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 50%;
-  height: 3px;
-  background: var(--wot-primary);
-  border-radius: 2px;
-}
-
-.profile-page .profile-actions {
-  display: flex;
-  gap: 12px;
-}
-
-.profile-page .profile-actions .wot-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-/* Сетка профиля */
-.profile-page .profile-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 25px;
-  margin-bottom: 40px;
-}
-
-@media (max-width: 992px) {
-  .profile-page .profile-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
-
-/* Карточки */
-.profile-page .wot-card {
-  background: linear-gradient(135deg, var(--wot-bg-panel) 0%, #1e2025 100%);
-  border: 1px solid #2f3136;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.profile-page .wot-card:hover {
-  border-color: var(--wot-primary);
-  box-shadow: 0 15px 35px -5px rgba(255, 120, 0, 0.2);
-  transform: translateY(-3px);
-}
-
-.profile-page .wot-card-header {
-  padding: 18px 20px;
-  background: rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid #2f3136;
-  position: relative;
-  overflow: hidden;
-}
-
-.profile-page .wot-card-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--wot-primary), transparent);
-}
-
-.profile-page .wot-card-title {
-  font-size: 1.3rem;
+* {
+  box-sizing: border-box;
   margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #fff;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--wot-bg-dark);
+  color: var(--wot-text-main);
+  line-height: 1.6;
+  background-image: 
+    radial-gradient(circle at 50% 0%, #1a1e24 0%, var(--wot-bg-dark) 70%);
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--wot-bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wot-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wot-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Condensed', sans-serif;
   text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 15px;
   letter-spacing: 1px;
 }
 
-.profile-page .wot-card-title i {
+h1 { font-size: 2.5rem; border-bottom: 2px solid var(--wot-primary); display: inline-block; padding-bottom: 5px; }
+h2 { font-size: 1.8rem; }
+p { margin-bottom: 1rem; }
+
+a {
   color: var(--wot-primary);
-  font-size: 1.4rem;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-.profile-page .wot-card-body {
+a:hover {
+  color: var(--wot-primary-hover);
+  text-decoration: underline;
+}
+
+.wot-container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
 }
 
-/* Информационные строки */
-.profile-page .info-row {
-  display: flex;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: background-color 0.2s ease;
-}
-
-.profile-page .info-row:hover {
-  background-color: rgba(255, 120, 0, 0.02);
-  padding-left: 5px;
-}
-
-.profile-page .info-row:last-child {
-  border-bottom: none;
-}
-
-.profile-page .info-label {
-  width: 130px;
-  color: var(--wot-secondary);
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-  font-weight: 500;
-}
-
-.profile-page .info-value {
+.wot-btn {
+  display: inline-block;
+  background: linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 100%);
   color: #fff;
-  font-weight: 500;
-  font-size: 1.1rem;
-  flex: 1;
-  position: relative;
-  padding-left: 10px;
-  border-left: 2px solid var(--wot-primary);
-}
-
-/* Email секция */
-.profile-page .email-value-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
-  flex-wrap: wrap;
-  padding-left: 10px;
-  border-left: 2px solid var(--wot-primary);
-}
-
-.profile-page .email-hidden {
-  color: var(--wot-text-dim);
-  font-family: 'Roboto Mono', monospace;
-  letter-spacing: 2px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.profile-page .email-visible {
-  color: var(--wot-primary);
-  font-weight: 600;
-  background: rgba(255, 120, 0, 0.1);
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 120, 0, 0.3);
-}
-
-.profile-page .wot-btn-small {
-  padding: 6px 15px;
-  font-size: 0.85rem;
-  background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-  border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid #4a4a4a;
-  transition: all 0.2s ease;
-}
-
-.profile-page .wot-btn-small:hover {
-  background: linear-gradient(180deg, #4a4a4a 0%, #3a3a3a 100%);
-  border-color: var(--wot-primary);
-  transform: scale(1.05);
-}
-
-.profile-page .wot-btn-small i {
-  font-size: 0.9rem;
-  transition: transform 0.2s ease;
-}
-
-.profile-page .wot-btn-small:hover i {
-  transform: scale(1.1);
-}
-
-/* Информационная заметка */
-.profile-page .info-note {
-  margin: 15px 20px 20px;
-  padding: 12px 15px;
-  background: rgba(255, 120, 0, 0.05);
-  border: 1px solid rgba(255, 120, 0, 0.2);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: var(--wot-text-dim);
-}
-
-.profile-page .info-note i {
-  color: var(--wot-primary);
-  font-size: 1.1rem;
-}
-
-/* Форма смены пароля */
-.profile-page .password-card .wot-card-body {
-  padding: 25px;
-}
-
-.profile-page .wot-input-group {
-  margin-bottom: 20px;
-}
-
-.profile-page .wot-label {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 8px;
-  color: var(--wot-text-main);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.profile-page .wot-label i {
-  color: var(--wot-primary);
-  font-size: 0.9rem;
-}
-
-.profile-page .wot-input {
-  width: 100%;
-  padding: 14px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid #3a3a3a;
-  border-radius: 6px;
-  color: #fff;
+  border: 1px solid var(--wot-border);
+  padding: 12px 24px;
+  font-family: 'Roboto Condensed', sans-serif;
   font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
   transition: all 0.2s ease;
-}
-
-.profile-page .wot-input:focus {
-  border-color: var(--wot-primary);
-  box-shadow: 0 0 0 3px rgba(255, 120, 0, 0.2);
-  background-color: rgba(0, 0, 0, 0.5);
-  outline: none;
-}
-
-.profile-page .wot-input:hover {
-  border-color: #5a5a5a;
-}
-
-/* Кнопка отправки формы */
-.profile-page .wot-btn-primary {
-  margin-top: 10px;
-  padding: 14px;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: linear-gradient(135deg, #ff8c00 0%, #cc6a00 100%);
-  border: none;
+  box-shadow: 0 4px 6px var(--wot-shadow);
   position: relative;
   overflow: hidden;
 }
 
-.profile-page .wot-btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+.wot-btn:hover {
+  background: linear-gradient(180deg, #5a5a5a 0%, #3a3a3a 100%);
+  border-color: #fff;
+  transform: translateY(-2px);
 }
 
-.profile-page .wot-btn-primary:hover::before {
-  width: 300px;
-  height: 300px;
+.wot-btn-primary {
+  background: linear-gradient(180deg, #ff8c00 0%, #cc6a00 100%);
+  border: 1px solid #ff9a30;
+  color: #000;
 }
 
-.profile-page .wot-btn-primary i {
-  position: relative;
-  z-index: 1;
+.wot-btn-primary:hover {
+  background: linear-gradient(180deg, #ffa03d 0%, #ff8c00 100%);
+  box-shadow: 0 0 15px rgba(255, 120, 0, 0.4);
 }
 
-/* Сообщение об ошибке */
-.profile-page .error-message {
-  background-color: rgba(211, 47, 47, 0.15);
-  border-left: 4px solid #d32f2f;
-  border-radius: 4px;
-  padding: 12px 15px;
+.wot-btn-gold {
+  background: linear-gradient(180deg, #f2d479 0%, #a07c20 100%);
+  border: 1px solid #fff3b0;
+  color: #1a1c20;
+}
+
+.wot-btn-gold:hover {
+  background: linear-gradient(180deg, #fff7d6 0%, #c9a052 100%);
+}
+
+.wot-card {
+  background-color: var(--wot-bg-panel);
+  border: 1px solid #2a2c30;
   margin-bottom: 20px;
-  font-size: 0.95rem;
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.wot-card:hover {
+  border-color: var(--wot-primary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.wot-card-header {
+  padding: 15px;
+  border-bottom: 1px solid #2a2c30;
+  background: rgba(0,0,0,0.2);
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  animation: shake 0.3s ease-in-out;
 }
 
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-5px); }
-  40% { transform: translateX(5px); }
-  60% { transform: translateX(-3px); }
-  80% { transform: translateX(3px); }
-}
-
-.profile-page .error-message::before {
-  content: '⚠️';
-  font-size: 1.1rem;
-}
-
-/* Футер профиля */
-.profile-page .profile-footer {
-  text-align: center;
-  padding: 25px;
-  margin-top: 20px;
-  border-top: 1px solid rgba(255, 120, 0, 0.2);
-  color: var(--wot-text-dim);
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.profile-page .profile-footer i {
-  color: var(--wot-primary);
+.wot-card-title {
   font-size: 1.2rem;
+  margin: 0;
 }
 
-/* Адаптивность для мобильных */
-@media (max-width: 576px) {
-  .profile-page .profile-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .profile-page .profile-actions {
-    width: 100%;
-    justify-content: space-between;
-  }
-  
-  .profile-page .info-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  
-  .profile-page .info-label {
-    width: 100%;
-  }
-  
-  .profile-page .info-value,
-  .profile-page .email-value-container {
-    width: 100%;
-    padding-left: 0;
-    border-left: none;
-  }
-  
-  .profile-page .email-value-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .profile-page .wot-btn-small {
-    width: 100%;
-    justify-content: center;
-  }
+.wot-card-body {
+  padding: 15px;
+  text-align: center;
+}
+
+.wot-card-img {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+  transition: transform 0.3s;
+}
+
+.wot-card:hover .wot-card-img {
+  transform: scale(1.05);
+}
+
+.wot-card-footer {
+  padding: 15px;
+  border-top: 1px solid #2a2c30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.1);
+}
+
+.wot-badge {
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 2px;
+  color: #fff;
+}
+
+.wot-badge-premium {
+  background-color: var(--wot-gold);
+  color: #000;
+}
+
+.wot-badge-sale {
+  background-color: #d32f2f;
+}
+
+.wot-badge-new {
+  background-color: var(--wot-primary);
+  color: #000;
+}
+
+.wot-input-group {
+  margin-bottom: 15px;
+}
+
+.wot-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--wot-secondary);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.wot-input, .wot-select {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--wot-bg-input);
+  border: 1px solid #3a3a3a;
+  color: var(--wot-text-main);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.wot-input:focus, .wot-select:focus {
+  border-color: var(--wot-primary);
+  box-shadow: 0 0 5px rgba(255, 120, 0, 0.2);
+}
+
+.wot-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.wot-table th, .wot-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #2a2c30;
+}
+
+.wot-table th {
+  background-color: rgba(255,255,255,0.05);
+  color: var(--wot-primary);
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: uppercase;
+}
+
+.wot-table tr:hover {
+  background-color: rgba(255, 120, 0, 0.05);
+}
+
+.wot-navbar {
+  background: linear-gradient(180deg, #1f2227 0%, #121316 100%);
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.wot-logo {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #fff;
+  margin-right: 40px;
+}
+
+.wot-logo span {
+  color: var(--wot-primary);
+}
+
+.wot-nav-link {
+  color: var(--wot-text-main);
+  padding: 10px 15px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  border-bottom: 3px solid transparent;
+}
+
+.wot-nav-link:hover, .wot-nav-link.active {
+  background: rgba(255,255,255,0.05);
+  border-bottom-color: var(--wot-primary);
+  color: #fff;
+  text-decoration: none;
+}
+
+.text-center { text-align: center; }
+.text-gold { color: var(--wot-gold); }
+.text-price { color: var(--wot-primary); font-weight: bold; font-size: 1.2rem; }
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+
+/* Notification styles */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #2e7d32 0%, #ff7800 100%);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  font-family: 'Roboto', sans-serif;
+}
+
+.notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Cart item removal animation */
+.cart-item.removing {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 0.3s ease;
+}
+
+/* Button success state */
+.tank-buy-btn.success {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%) !important;
+}
+
+/* Card form input styles for card number */
+.card-input-group {
+  margin-bottom: 15px;
+}
+
+.card-input-group .wot-input {
+  letter-spacing: 2px;
+}
+
+/* Card number input */
+input[type="text"][maxlength="16"] {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
 }

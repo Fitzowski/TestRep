@@ -1,5 +1,5 @@
 import { api } from '../services/api.js';
-// import { apiCart } from '../services/api_cart.js';
+import { apiCart } from '../services/api_cart.js';
 import { router } from '../main.js';
 import { AuthResponse } from '../types/index.js';
 
@@ -304,7 +304,7 @@ function setupEventListeners() {
       (target as HTMLButtonElement).disabled = true;
       
       try {
-        // await apiCart.addToCart(tankId, 1);
+        await apiCart.addToCart(tankId, 1);
         
         // Успех
         target.innerHTML = '<i class="fas fa-check"></i> Добавлено!';

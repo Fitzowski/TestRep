@@ -158,5 +158,25 @@
     "paymentMethod": "card",
     "status": "pending",
     "createdAt": "2026-03-05T18:59:51.536Z"
+  },
+  {
+    "id": "1772861770863",
+    "userId": "1772697864764",
+    "items": [
+      {
+        "productId": 2,
+        "productName": "E 100",
+        "productImg": "images/tanks/e-100.png",
+        "quantity": 1,
+        "price": 6100
+      }
+    ],
+    "totalPrice": 6100,
+    "address": "zigor",
+    "phone": "+375 (25) 756-03-65",
+    "email": "n.smantser555@gmail.com",
+    "paymentMethod": "card",
+    "status": "pending",
+    "createdAt": "2026-03-07T05:36:10.863Z"
   }
 ]

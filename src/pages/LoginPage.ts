@@ -58,8 +58,9 @@ export function renderLoginPage() {
       const response: AuthResponse = await api.login(email, password);
       console.log('Login successful:', response.user);
       router.navigateTo('/main');
-    } catch (err: any) {
-      alert(err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Произошла ошибка';
+      alert(message);
     }
   });
 

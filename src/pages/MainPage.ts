@@ -260,7 +260,7 @@ export async function renderMainPage() {
 
     setupEventListeners();
 
-  } catch {
+  } catch (_err: unknown) {
     router.navigateTo('/');
   }
 }
@@ -320,7 +320,7 @@ function setupEventListeners() {
           (target as HTMLButtonElement).disabled = false;
         }, 2000);
         
-      } catch (err) {
+      } catch (err: unknown) {
         console.error(err);
         target.innerHTML = '<i class="fas fa-shopping-cart" style="margin-right: 5px;"></i> Купить';
         (target as HTMLButtonElement).disabled = false;

@@ -159,8 +159,9 @@ export async function renderProfilePage() {
         alert('Пароль успешно изменён. Пожалуйста, войдите заново.');
         await api.logout();
         router.navigateTo('/');
-      } catch (err: any) {
-        errorDiv.textContent = err.message || 'Ошибка при смене пароля. Проверьте старый пароль.';
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : 'Ошибка при смене пароля. Проверьте старый пароль.';
+        errorDiv.textContent = message;
         errorDiv.style.display = 'block';
       }
     });
@@ -190,10 +191,10 @@ export async function renderProfilePage() {
         }
       });
     } else {
-      console.warn('123');
+      // Элементы управления email не найдены
     }
 
-  } catch (error) {
+  } catch (_err: unknown) {
     router.navigateTo('/');
   }
 }

@@ -33,7 +33,7 @@ export function renderRegisterPage() {
           <h2>IYHAN SHOP</h2>
           <p>Создание нового аккаунта</p>
         </div>
-        <form id="register-form">
+        <form id="register-form" data-registration>
           <div class="wot-input-group">
             <label class="wot-label">
               <i class="fas fa-user"></i>
@@ -47,6 +47,13 @@ export function renderRegisterPage() {
               Email
             </label>
             <input type="email" class="wot-input" id="email" placeholder="your@email.com" required>
+          </div>
+          <div class="wot-input-group">
+            <label class="wot-label">
+              <i class="fas fa-phone"></i>
+              Телефон
+            </label>
+            <input type="tel" class="wot-input" id="phone" placeholder="+375 (29) 123-45-67">
           </div>
           <div class="wot-input-group">
             <label class="wot-label">
@@ -114,6 +121,7 @@ export function renderRegisterPage() {
     
     const nickname = (document.getElementById('nickname') as HTMLInputElement).value.trim();
     const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
     const password = (document.getElementById('password') as HTMLInputElement).value;
     const confirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
     const terms = (document.getElementById('terms') as HTMLInputElement).checked;
@@ -142,7 +150,7 @@ export function renderRegisterPage() {
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Регистрация...';
       
-      const response: AuthResponse = await api.register(nickname, email, password);
+      const response: AuthResponse = await api.register(nickname, email, password, phone);
       console.log('Registration successful:', response.user);
       
       showNotification('Регистрация успешна! Перенаправляем...', false);
@@ -151,11 +159,11 @@ export function renderRegisterPage() {
         router.navigateTo('/login');
       }, 1500);
       
-    } catch (err: any) {
+    } catch (err: unknown) {
       submitBtn.disabled = false;
       submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Зарегистрироваться';
       
-      let errorMessage = err.message || 'Ошибка при регистрации';
+      let errorMessage = err instanceof Error ? err.message : 'Ошибка при регистрации';
       
       if (errorMessage.includes('email already exists')) {
         errorMessage = 'Пользователь с таким email уже существует';

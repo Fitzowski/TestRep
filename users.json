@@ -38,7 +38,15 @@
     "id": "1772697864764",
     "nickname": "rxxksyan",
     "email": "n.smantser555@gmail.com",
-    "passwordHash": "$2b$10$yjuLWDP20W2k..p2Y2iRau.p7p9GllJN3shEwx.catSa3sIiORovO",
+    "passwordHash": "$2b$10$hBtLWBSF323EdGTwuZEy0OdgzlTEbryWIgdehmyh2GidLAUjthwnO",
     "createdAt": "2026-03-05T08:04:24.764Z"
+  },
+  {
+    "id": "1772871004683",
+    "nickname": "rxksyan",
+    "email": "n.smantser666@gmail.com",
+    "phone": "+375 (25) 756-03-65",
+    "passwordHash": "$2b$10$0p86Ju/7cOrGzAbdNB8X6eei3gbFN9nPtVk3/LRGfq9q4a985HPk2",
+    "createdAt": "2026-03-07T08:10:04.683Z"
   }
 ]

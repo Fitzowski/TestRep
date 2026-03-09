@@ -32,7 +32,7 @@ export async function renderHomePage() {
     } else {
       renderNotAuth(app);
     }
-  } catch {
+  } catch (_err: unknown) {
     renderNotAuth(app);
   }
 }
